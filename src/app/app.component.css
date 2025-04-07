@@ -95,3 +95,19 @@ app-button button:active {
 .reuse-button:hover {
   background: #bbb;
 }
+
+.display-area {
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  font-size: 1.5rem;
+  background-color: #f3f4f6;
+  border-radius: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  box-sizing: border-box;
+}
