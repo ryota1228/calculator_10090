@@ -117,7 +117,6 @@ export class AppComponent {
       const openCount = (this.display.match(/\(/g) || []).length;
       const closeCount = (this.display.match(/\)/g) || []).length;
 
-      // すでにバランスしている場合、次が ')' ならスキップ
       if (closeCount >= openCount) {
         if (this.display[end] === ')') {
           this.setCursor(end + 1);
@@ -125,7 +124,6 @@ export class AppComponent {
         return;
       }
 
-      // 通常の ')' 挿入
       this.display = this.display.slice(0, start) + ')' + this.display.slice(end);
       this.setCursor(start + 1);
       return;
@@ -159,7 +157,6 @@ export class AppComponent {
       return;
     }
 
-    // clear if previous was result and new input is number
     if (this.justEvaluated && /\d/.test(label)) {
       this.display = '';
     }
