@@ -5,7 +5,11 @@ import { Injectable } from '@angular/core';
 })
 export class CalculatorService {
   evaluate(expression: string): number {
-    if (!/^[\d+\-*/().^%√\s]+$/.test(expression)) {
+  
+    expression = expression.replace(/(\d+(?:\.\d+)?)\s*([\+\-])\s*(\d+(?:\.\d+)?)%/, (_, a, op, b) => {
+      return `${a} ${op} (${b} / 100 * ${a})`;
+    });
+if (!/^[\d+\-*/().^%√\s]+$/.test(expression)) {
       throw new Error('Invalid characters in expression');
     }
 
@@ -57,23 +61,22 @@ export class CalculatorService {
         while (ops.length && ops[ops.length - 1] !== '(') {
           output.push(ops.pop()!);
         }
-        ops.pop(); // '(' を捨てる
+        ops.pop();
 
-        // 直前が √ の場合は関数適用として追加
         if (ops.length && ops[ops.length - 1] === '√') {
           output.push(ops.pop()!);
         }
       } else if (ch === '-' && (i === 0 || /[+\-*/^%√(]/.test(expr[i - 1]))) {
-        // 単項マイナス
+        
         let num = '-';
         i++;
         while (i < expr.length && /[\d.]/.test(expr[i])) {
           num += expr[i++];
         }
         output.push(num);
-        i--; // 位置調整
+        i--;
       } else if (ch === '√') {
-        ops.push(ch); // 関数として演算子スタックに入れる
+        ops.push(ch);
       } else if (prec[ch]) {
         while (
           ops.length &&
@@ -95,7 +98,6 @@ export class CalculatorService {
       output.push(ops.pop()!);
     }
 
-    // RPN を評価
     const stack: number[] = [];
     for (const token of output) {
       if (!isNaN(Number(token))) {
