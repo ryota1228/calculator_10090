@@ -46,6 +46,17 @@ export class AppComponent {
     }
   }
 
+  @HostListener('window:beforeinput', ['$event'])
+onBeforeInput(event: InputEvent) {
+  if (typeof event.data === 'string' && this.containsFullWidthChars(event.data)) {
+    event.preventDefault();
+  }
+}
+
+containsFullWidthChars(text: string): boolean {
+  return /[！-～ｦ-ﾟぁ-んァ-ヶ一-龯＝]/.test(text);
+}
+
   onPress(label: string) {
     const input = this.inputRef.nativeElement;
     const start = input.selectionStart ?? this.display.length;
@@ -203,14 +214,14 @@ export class AppComponent {
     const prev = this.display.slice(0, start);
     if (/(\D|^)\b0$/.test(prev) && /\d/.test(converted)) return;
 
-    if (
-      (/\d$/.test(lastChar) && converted === '(') ||
-      (/\d$/.test(lastChar) && converted === '√') ||
-      (lastChar === ')' && /\d|\(/.test(converted))
-    ) {
-      this.display =
-        this.display.slice(0, start) + '*' + converted + this.display.slice(end);
-      this.setCursor(start + 1 + converted.length);
+    if (converted === '(') {
+      if (/\d$/.test(lastChar)) {
+        this.display = this.display.slice(0, start) + '*()' + this.display.slice(end);
+        this.setCursor(start + 2);
+      } else {
+        this.display = this.display.slice(0, start) + '()' + this.display.slice(end);
+        this.setCursor(start + 1);
+      }
       return;
     }
 
