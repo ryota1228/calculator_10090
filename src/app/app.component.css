@@ -1,0 +1,97 @@
+.calculator {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background: #f9f9f9;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.display-wrapper {
+  position: relative;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.display-input {
+  width: 100%;
+  font-size: 2rem;
+  line-height: 2.1rem;            /* ← 少し高めに調整してバランス取り */
+  padding: 0.4rem 1rem;           /* ← 上下少し詰める */
+  text-align: right;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  outline: none;
+  background: white;
+  color: transparent;
+  caret-color: black;
+  font-family: inherit;           /* ← フォントを戻す！ */
+  box-sizing: border-box;
+}
+
+.display-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 0.4rem 1rem;
+  font-size: 2rem;
+  line-height: 2.4rem;            /* ← input と揃える */
+  text-align: right;
+  color: #333;
+  pointer-events: none;
+  font-family: inherit;           /* ← 同じく揃える */
+  box-sizing: border-box;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+}
+
+app-button button {
+  font-size: 1.25rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: none;
+  background: #e0e0e0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  width: 100%;
+}
+
+app-button button:hover {
+  background: #ccc;
+}
+
+app-button button:active {
+  background: #bbb;
+}
+
+.history {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+}
+
+.history-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed #ddd;
+}
+
+.reuse-button {
+  background: #ddd;
+  border: none;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.reuse-button:hover {
+  background: #bbb;
+}

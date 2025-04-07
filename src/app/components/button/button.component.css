@@ -1,0 +1,19 @@
+button {
+    width: 100%;
+    font-size: 1.25rem;
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: none;
+    background: #e0e0e0;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+  
+  button:hover {
+    background: #ccc;
+  }
+  
+  button:active {
+    background: #bbb;
+  }
+  
